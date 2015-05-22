@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+       <groupId>com.github.jsw</groupId>
+	<artifactId>swagger-maven-test</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<modelVersion>4.0.0</modelVersion>
+
+	<dependencies>
+          <dependency>
+	    <groupId>javax.ws.rs</groupId>
+	    <artifactId>javax.ws.rs-api</artifactId>
+	    <version>2.0.1</version>
+	    <scope>provided</scope>
+	  </dependency>
+	  <dependency>
+	    <groupId>org.scala-lang</groupId>
+	    <artifactId>scala-library</artifactId>
+	    <version>2.11.5</version>
+	  </dependency>
+        	<dependency>
+			<groupId>com.wordnik</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>1.5.3-M1</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<id>scala-compile-first</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>add-source</goal>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>scala-test-compile</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+<!--            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>2.3.4</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <locations>com.github.jsw</locations>
+                            <apiVersion>v1</apiVersion>
+                            <basePath>/basePath</basePath>
+                            <apiInfo>
+                                <title>Hello Service</title>
+                                <description>Hello Description</description>
+                            </apiInfo>
+                            <swaggerInternalFilter>com.wordnik.swagger.config.DefaultSpecFilter</swaggerInternalFilter>
+                            <mustacheFileRoot>${basedir}/src/test/resources/swagger</mustacheFileRoot>
+                            <outputTemplate>${basedir}/src/test/resources/swagger/strapdown.html.mustache</outputTemplate>
+                            <outputPath>${project.build.directory}/site/swagger/api.html</outputPath>
+                            <swaggerDirectory>${project.build.directory}/generated/swagger-ui</swaggerDirectory>
+                            <swaggerUIDocBasePath>http://www.wordnik.com/restapi/doc</swaggerUIDocBasePath>
+                            <useOutputFlatStructure>false</useOutputFlatStructure>
+                    </apiSource>
+                </apiSources>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>compile</phase>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                </execution>
+            </executions>
+           </plugin>			-->
+             <plugin>
+                 <groupId>com.github.kongchen</groupId>
+                 <artifactId>swagger-maven-plugin</artifactId> 
+                 <version>3.0.1-SNAPSHOT</version>
+                 <configuration> 
+                     <apiSources>
+                         <apiSource> 
+                             <locations>com.github.jsw</locations> 
+                             <schemes>http</schemes>
+                             <basePath>/basePath</basePath>
+                             <info>
+                                 <title>Hello Service</title>
+                                 <version>1</version> 
+                                 <description>Hello Description</description>
+                                 <contact> 
+                                     <name>Jeff White</name>
+                                 </contact> 
+                             </info> 
+                             <templatePath>${basedir}/src/test/resources/swagger/strapdown.html.hbs</templatePath> 
+                             <outputPath>${project.build.directory}/site/swagger/api2.html</outputPath> 
+                             <swaggerDirectory>${project.build.directory}/generated/swagger-ui</swaggerDirectory> 
+                         </apiSource> 
+                 </apiSources> 
+             </configuration> 
+             <executions> 
+                 <execution> 
+                     <phase>compile</phase> 
+                     <goals> 
+                         <goal>generate</goal> 
+                     </goals> 
+                 </execution> 
+            </executions> 
+            </plugin>             
+		</plugins>
+	</build>
+</project>
